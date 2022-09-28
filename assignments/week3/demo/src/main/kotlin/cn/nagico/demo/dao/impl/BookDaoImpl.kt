@@ -1,6 +1,6 @@
-package cn.nagico.dao.impl
+package cn.nagico.demo.dao.impl
 
-import cn.nagico.dao.BookDao
+import cn.nagico.demo.dao.BookDao
 
 class BookDaoImpl : BookDao {
     lateinit var name: String

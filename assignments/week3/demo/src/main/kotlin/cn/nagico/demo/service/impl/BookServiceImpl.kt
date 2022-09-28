@@ -1,7 +1,7 @@
-package cn.nagico.service.impl
+package cn.nagico.demo.service.impl
 
-import cn.nagico.dao.BookDao
-import cn.nagico.service.BookService
+import cn.nagico.demo.dao.BookDao
+import cn.nagico.demo.service.BookService
 
 class BookServiceImpl : BookService {
     lateinit var name: String

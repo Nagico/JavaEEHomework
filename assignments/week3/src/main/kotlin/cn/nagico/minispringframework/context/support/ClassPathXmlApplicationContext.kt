@@ -5,7 +5,7 @@ import cn.nagico.minispringframework.beans.factory.config.BeanDefinitionRegistry
 import cn.nagico.minispringframework.beans.factory.reader.XmlBeanDefinitionReader
 import cn.nagico.minispringframework.context.ApplicationContext
 
-class ClassPathXmlApplicationContext(configLocation: String) : ApplicationContext() {
+open class ClassPathXmlApplicationContext(configLocation: String) : ApplicationContext() {
     init {
         beanFactory = BeanFactory()
 
