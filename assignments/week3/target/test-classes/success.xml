@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    <bean id="bookDao" class="cn.nagico.minispringframework.test.obj1">
+        <property name="name" value="mysql"/>
+        <property name="connectUrl" value="jdbc:mysql://127.0.0.1/test_db?useUnicode=true&amp;characterEncoding=UTF-8"/>
+    </bean>
+    <bean id="bookService" class="cn.nagico.minispringframework.test.obj2">
+        <property name="name" value="first_service"/>
+        <property name="bookDao" ref="bookDao"/>
+    </bean>
+</beans>

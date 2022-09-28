@@ -3,7 +3,6 @@ package cn.nagico.minispringframework.beans.factory.reader
 import cn.nagico.minispringframework.beans.factory.config.BeanDefinition
 import org.dom4j.io.SAXReader
 import java.io.File
-import java.util.*
 
 
 open class XmlBeanDefinitionReader {
@@ -13,7 +12,7 @@ open class XmlBeanDefinitionReader {
             val saxReader = SAXReader()
             return saxReader.read(File(xmlPath))
         } catch (ex: Exception) {
-            throw BeanReaderException("Error loading xml file")
+            throw BeanReaderException("Error loading xml file $configLocation", ex)
         }
     }
 
@@ -49,11 +48,17 @@ open class XmlBeanDefinitionReader {
             return beanDefinition
         }
         catch (ex: Exception) {
-            throw BeanReaderException("Error loading bean definitions")
+            throw BeanReaderException("Error loading bean definitions", ex)
         }
 
     }
 
+    /**
+     * 加载bean注入文件
+     *
+     * @param configLocation bean注入文件路径
+     * @return bean注入列表
+     */
     open fun loadBeanDefinitions(configLocation: String): List<BeanDefinition> {
         val document = loadXMLDocument(configLocation)
         val beansElement = loadBeanList(document)

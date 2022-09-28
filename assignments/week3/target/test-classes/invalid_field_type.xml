@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    <bean id="bookDao" class="cn.nagico.minispringframework.test.obj3">
+        <property name="id" value="mysql"/>
+    </bean>
+</beans>
