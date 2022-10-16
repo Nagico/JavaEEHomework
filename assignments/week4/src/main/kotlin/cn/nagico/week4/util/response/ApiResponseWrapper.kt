@@ -1,0 +1,50 @@
+package cn.nagico.week4.util.response
+
+import com.alibaba.fastjson.JSON
+import org.springframework.core.MethodParameter
+import org.springframework.http.MediaType
+import org.springframework.http.converter.HttpMessageConverter
+import org.springframework.http.server.ServerHttpRequest
+import org.springframework.http.server.ServerHttpResponse
+import org.springframework.web.bind.annotation.RestControllerAdvice
+import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice
+
+/**
+ * API响应包装器
+ *
+ */
+@RestControllerAdvice
+class ApiResponseWrapper : ResponseBodyAdvice<Any> {
+    /**
+     * 支持包装
+     */
+    override fun supports(returnType: MethodParameter, converterType: Class<out HttpMessageConverter<*>>): Boolean {
+        return !returnType.declaringClass.name.contains("springfox")
+    }
+
+    /**
+     * 包装响应
+     *
+     */
+    override fun beforeBodyWrite(
+        body: Any?,
+        returnType: MethodParameter,
+        selectedContentType: MediaType,
+        selectedConverterType: Class<out HttpMessageConverter<*>>,
+        request: ServerHttpRequest,
+        response: ServerHttpResponse
+    ): Any {
+        if (body is String){
+            // 输出 JSON 头信息
+            response.headers.set("Content-Type", "application/json;charset=UTF-8")
+            return JSON.toJSONString(ApiResponse.success(body))
+        }
+        // 防止全局异常处理后返回的结果（类型为ApiResult）再次被包装
+        if (body is ApiResponse<*>) {
+            return body
+        }
+
+        return ApiResponse.success(body)
+    }
+
+}
