@@ -56,4 +56,8 @@ class ProductService {
         productList.find { it.id == id } ?: throw ApiException(ApiResponseType.ID_NOT_EXIST)
         productList.removeIf { it.id == id }
     }
+
+    fun clearAll() {
+        productList.clear()
+    }
 }

@@ -2,6 +2,7 @@ package cn.nagico.week4.util.response
 
 import com.alibaba.fastjson.JSON
 import org.springframework.core.MethodParameter
+import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.converter.HttpMessageConverter
 import org.springframework.http.server.ServerHttpRequest
@@ -39,8 +40,10 @@ class ApiResponseWrapper : ResponseBodyAdvice<Any> {
             response.headers.set("Content-Type", "application/json;charset=UTF-8")
             return JSON.toJSONString(ApiResponse.success(body))
         }
-        // 防止全局异常处理后返回的结果（类型为ApiResult）再次被包装
+        // 处理全局异常处理后返回的结果
         if (body is ApiResponse<*>) {
+            response.headers.set("Content-Type", "application/json;charset=UTF-8")
+            response.setStatusCode(body.httpStatus)
             return body
         }
 

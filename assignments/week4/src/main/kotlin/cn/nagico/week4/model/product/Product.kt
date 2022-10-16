@@ -1,6 +1,7 @@
 package cn.nagico.week4.model.product
 
 import io.swagger.v3.oas.annotations.media.Schema
+import org.springframework.stereotype.Component
 import java.util.Date
 
 @Schema(description = "商品")

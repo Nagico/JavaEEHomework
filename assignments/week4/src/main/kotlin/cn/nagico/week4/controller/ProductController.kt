@@ -5,6 +5,7 @@ import cn.nagico.week4.model.product.ProductInfo
 import cn.nagico.week4.service.ProductService
 import cn.nagico.week4.util.pagenation.PagedList
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.NoSuchElementException
@@ -25,16 +26,12 @@ class ProductController {
     }
 
     @GetMapping("{id}")
-    fun getProduct(@PathVariable id: Int): ResponseEntity<Product> {
-        val res = productService.getProduct(id)
-        return if (res != null) {
-            ResponseEntity.ok(res)
-        } else {
-            ResponseEntity.notFound().build()
-        }
+    fun getProduct(@PathVariable id: Int): Product {
+        return productService.getProduct(id)
     }
 
     @PostMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
     fun addProduct(@RequestBody product: Product): Product {
         return productService.addProduct(product)
     }

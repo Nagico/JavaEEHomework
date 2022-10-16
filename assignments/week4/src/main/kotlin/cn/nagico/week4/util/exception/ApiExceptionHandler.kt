@@ -21,7 +21,7 @@ class ApiExceptionHandler {
     @ExceptionHandler(ApiException::class)
     fun handleApiException(e: ApiException): ApiResponse<String> {
         logger.error(e.message)
-        return ApiResponse(e.code, e.message, null)
+        return ApiResponse.fail(e.code, e.message, e.httpStatus)
     }
 
     /**
@@ -37,6 +37,6 @@ class ApiExceptionHandler {
         if (logger.isInfoEnabled) {
             e.printStackTrace()
         }
-        return ApiResponse(ApiResponseType.UNKNOWN_ERROR.code, ApiResponseType.UNKNOWN_ERROR.message, e.message)
+        return ApiResponse(ApiResponseType.UNKNOWN_ERROR.code, ApiResponseType.UNKNOWN_ERROR.message, e.message, ApiResponseType.UNKNOWN_ERROR.httpStatus)
     }
 }

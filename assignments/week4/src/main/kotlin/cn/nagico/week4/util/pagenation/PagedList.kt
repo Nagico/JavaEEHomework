@@ -3,13 +3,13 @@ package cn.nagico.week4.util.pagenation
 import java.lang.Integer.min
 import java.net.URI
 
-class PagedList<T>(page: Int, pageSize: Int, data: List<T>, uri: URI? = null) {
-    val count: Int
-    val previous: String?
-    val next: String?
-    val results: List<T>
+class PagedList<T>(
+    var count: Int = 0,
+    var previous: String? = null,
+    var next: String? = null,
+    var results: List<T> = listOf()) {
 
-    init {
+    constructor(page: Int, pageSize: Int, data: List<T>, uri: URI? = null) : this() {
         count = data.size
         val start = (page - 1) * pageSize
         val end = start + pageSize
@@ -39,4 +39,5 @@ class PagedList<T>(page: Int, pageSize: Int, data: List<T>, uri: URI? = null) {
             data.subList(start, min(end, count))
         }
     }
+
 }
