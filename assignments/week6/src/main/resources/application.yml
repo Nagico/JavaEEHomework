@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+
+spring:
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+    time-zone: GMT+8
+  datasource:
+    url: jdbc:mysql://vps.coyangjr.cn:3306/order_system_spring?characterEncoding=utf8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: springboot
+    password: springboot
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

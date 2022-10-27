@@ -6,11 +6,7 @@ import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.EntityListeners
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.ManyToMany
+import javax.persistence.*
 
 @Entity
 @EntityListeners(AuditingEntityListener::class)
@@ -27,7 +23,7 @@ class Supplier (
     @Schema(description = "供应商地址")
     var description: String,
 
-    @ManyToMany(targetEntity = Product::class)
+    @ManyToMany(targetEntity = Product::class, fetch = FetchType.EAGER, cascade = [CascadeType.REFRESH])
     @Schema(description = "供应商提供的商品")
     var products: MutableList<Product>,
 
