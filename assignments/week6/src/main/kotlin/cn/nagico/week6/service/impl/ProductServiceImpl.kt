@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.extension.kotlin.KtQueryWrapper
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional
 
 /**
  * <p>
@@ -45,6 +46,7 @@ open class ProductServiceImpl : ServiceImpl<ProductMapper, Product>(), IProductS
         return productDto
     }
 
+    @Transactional  // 添加时需要注意一
     override fun addProduct(product: ProductDto): ProductDto {
         baseMapper.insert(product)
         for (supplier in product.suppliers) {
