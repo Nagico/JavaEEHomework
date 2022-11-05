@@ -19,4 +19,5 @@ enum class ApiResponseType(var code: String, var message: String, var httpStatus
     UNKNOWN_ERROR("A9000", "未知错误", HttpStatus.INTERNAL_SERVER_ERROR),
     NOT_LOGIN("A3001","未登录", HttpStatus.UNAUTHORIZED),
     NO_PERMISSION("A3002","无权限", HttpStatus.FORBIDDEN),
+    PAGE_NOT_FOUNT("A4001", "页面不存在", HttpStatus.NOT_FOUND),
 }
