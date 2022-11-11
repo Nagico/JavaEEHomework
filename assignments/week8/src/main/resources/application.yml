@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+
+spring:
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+    time-zone: GMT+8
+  datasource:
+    url: jdbc:mysql://vps.coyangjr.cn:3306/todos?characterEncoding=utf8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: springboot
+    password: springboot
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  security:
+    user:
+      name: admin
+      password: admin
+  redis:
+    database: 0
+    url: redis://server:6379
+    host: server
+    port: 6379
+    ssl: false
+    timeout: 5000
+
+jwt:
+    secret: 123456
+    expiration: 604800
